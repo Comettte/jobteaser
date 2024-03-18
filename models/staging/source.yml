@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: Jobteaser_Project
+    tables:
+      - name: candidate_status_update
+      - name: dim_schools
+      - name: optin
