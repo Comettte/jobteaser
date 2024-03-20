@@ -16,4 +16,4 @@ FROM
 GROUP BY 
   jt_country,
   jt_school_category,
-  career_center_type;
+  career_center_type
