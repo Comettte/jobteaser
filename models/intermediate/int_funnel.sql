@@ -20,6 +20,6 @@ from
             rank() over (
                 partition by user_id, school_id, shortlist_id order by receive_time desc
             ) as rnk
-        from {{ ref("int_candidates_deduplicates") }}
+        from {{ ref("int_candidates_pk") }}
     )
 where rnk = 1
