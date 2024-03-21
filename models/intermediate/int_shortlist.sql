@@ -2,9 +2,9 @@ with
     shortlist_schools as (
         select status.*, 
         jt_country
-        from {{ ref("int_candidates_deduplicates") }} as status
+        from {{ ref("int_candidates_pk") }} as status
         left join
-            {{ ref("int_school_category_zone") }} as schools
+            {{ ref("int_school") }} as schools
             on schools.school_id = status.school_id
     ),
 shortlist as (
@@ -26,7 +26,7 @@ SUM(CASE WHEN status_update = 'not interested'THEN 1 ELSE 0 END) as not_interest
 SUM(CASE WHEN status_update = 'interested'THEN 1 ELSE 0 END) as interested,
 SUM(CASE WHEN status_update = 'approved'THEN 1 ELSE 0 END) as approved,
 SUM(CASE WHEN status_update = 'declined'THEN 1 ELSE 0 END)  as declined,
-FROM `wise-analyst-417610.dbt__intermediate.int_funnel`
+FROM {{ ref('int_funnel') }}
 GROUP by shortlist_id
 )
 SELECT
