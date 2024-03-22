@@ -11,7 +11,7 @@ WITH
     SUM(interested) AS interested,
     SUM(approved) AS approved,
     SUM(declined) AS declined
-  FROM {{ ref('mart_students') }} 
+  FROM `wise-analyst-417610.dbt__mart.mart_students`
     GROUP BY school_id)
   
   SELECT 
