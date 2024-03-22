@@ -7,8 +7,8 @@ with
             user_id,
             school_id,
             cause,
-            active,
-            resume_uploaded,
+            CASE WHEN active  = true THEN 1 ELSE 0 END as active,
+            CASE WHEN resume_uploaded  = true THEN 1 ELSE 0 END as resume_uploaded,
             receive_time,
             current_sign_in_at,
             rnk
