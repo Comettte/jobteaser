@@ -7,3 +7,4 @@ sources:
       - name: candidate_status_update
       - name: dim_schools
       - name: optin
+      - name : europe_data
