@@ -5,7 +5,7 @@ WITH aggregation AS
   jt_school_category,
   career_center_type,
   COUNT(DISTINCT(school_id)) OVER (PARTITION BY jt_country, career_center_type, jt_school_category) AS nbschool,
-  ROUND(COUNT(DISTINCT(user_id)) OVER (PARTITION BY jt_country, career_center_type, jt_school_category),2) AS agg_user_per_school,
+  ROUND(COUNT(DISTINCT(user_id)) OVER (PARTITION BY jt_country, career_center_type, jt_school_category),2) AS avg_user_per_school,
   ROUND(SUM(active) OVER (PARTITION BY jt_country, career_center_type, jt_school_category),2) AS agg_active,
   ROUND(SUM(resume_uploaded) OVER (PARTITION BY jt_country, career_center_type, jt_school_category),2) AS agg_resume,
   ROUND(SUM(nb_shortlists) OVER (PARTITION BY jt_country, career_center_type, jt_school_category), 2) AS agg_nb_shortlists,
@@ -21,6 +21,11 @@ FROM
 divisionnbschool AS
  (
     SELECT 
+    school_id,
+    jt_country,
+    jt_school_category,
+    career_center_type,
+    avg_user_per_school,
     aggregation.agg_active / aggregation.nbschool AS avg_active,
     aggregation.agg_resume / aggregation.nbschool AS avg_resume,
     aggregation.agg_nb_shortlists / aggregation.nbschool AS avg_nb_shortlists,
